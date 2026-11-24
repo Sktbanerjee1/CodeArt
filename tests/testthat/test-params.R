@@ -3,11 +3,26 @@ test_that("params constructors return defaults and accept overrides", {
   expect_equal(silk_params(palette = "ocean")$palette, "ocean")
   expect_equal(shards_params(mono = "cobalt")$mono, "cobalt")
   expect_equal(cubes_params(spacing = 1.1)$spacing, 1.1)
+  expect_equal(wires_params()$mono, "silver")
+  expect_equal(wires_params(n_wires = 50)$n_wires, 50)
 })
 
 test_that("unknown or unnamed settings are rejected", {
   expect_error(silk_params(pallete = "ocean"), "unknown parameter")
   expect_error(cubes_params(1), "must be named")
+})
+
+test_that("watermark defaults to the project URL and can be switched off", {
+  wm <- watermark_params()
+  expect_equal(wm$caption, "https://github.com/Sktbanerjee1/CodeArt")
+  expect_equal(watermark_params(name = "Old Name")$caption, "Old Name")   # deprecated alias
+  old <- set_watermark(FALSE, caption = "Someone")
+  on.exit(options(old), add = TRUE)
+  expect_false(watermark_params()$enabled)
+  expect_false(silk_params()$watermark$enabled)
+  expect_equal(cubes_params()$watermark$caption, "Someone")
+  options(old)
+  expect_true(watermark_params()$enabled)
 })
 
 test_that("nested watermark overrides merge", {

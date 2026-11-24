@@ -3,3 +3,4 @@
 ^renders$
 ^.*\.png$
 ^README\.Rmd$
+^Claude outputs$

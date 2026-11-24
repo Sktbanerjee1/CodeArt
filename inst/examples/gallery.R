@@ -10,6 +10,7 @@ render_pinfield(pinfield_params(out_dir = out))
 render_silk(silk_params(out_dir = out))
 render_shards(shards_params(out_dir = out))
 render_cubes(cubes_params(out_dir = out))
+render_wires(wires_params(out_dir = out))
 #render_cubes(cubes_params(out_dir = out), clean = TRUE)
 
 # ---- every palette of a style ----
@@ -19,12 +20,15 @@ render_cubes(cubes_params(out_dir = out))
 #render_variants(render_shards,   shards_params(out_dir = out, palette_mode = "multi"), multi = names(MULTI_PALETTES))
 #render_variants(render_cubes,    cubes_params(out_dir = out),    mono = names(MONO_COLOURS))
 #render_variants(render_cubes,    cubes_params(out_dir = out, palette_mode = "multi"), multi = names(MULTI_PALETTES), clean = TRUE)
+#render_variants(render_wires,    wires_params(out_dir = out),    mono = c("silver", "steel_teal", "amber", "rose"))
+#render_variants(render_wires,    wires_params(out_dir = out, palette_mode = "multi"), multi = names(MULTI_PALETTES))
 
 # ---- other aspect ratios ----
 #render_pinfield(pinfield_params(out_dir = out, aspect = "4:5", W = 10))
 #render_silk(silk_params(out_dir = out, aspect = "21:9"))
 #render_shards(shards_params(out_dir = out, aspect = "16:9", W = 16))
 #render_cubes(cubes_params(out_dir = out, aspect = "9:16", W = 9))
+#render_wires(wires_params(out_dir = out, aspect = "4:5", W = 10))
 
 # ---- composition search: low-res drafts for several seeds ----
 #render_variants(render_silk, silk_params(out_dir = file.path(out, "drafts"), compute_px = 800, dpi = 100),
@@ -35,6 +39,7 @@ render_cubes(cubes_params(out_dir = out))
 #preview_colours(SILK_PALETTES$nebula$ramp)
 #list_palettes()
 
-# ---- your own watermark defaults for the session ----
-#options(codeart.name = "Saikat Bandyopadhyay", codeart.label = "CodeArt")
+# ---- watermark for the whole session ----
+#set_watermark(FALSE)                               # no watermark on anything that follows
+#set_watermark(TRUE, caption = "Your Name")         # your own caption under "CodeArt"
 #render_silk(silk_params(out_dir = out, watermark = watermark_params(position = "top-left", alpha = 0.6)))

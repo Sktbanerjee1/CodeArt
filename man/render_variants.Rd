@@ -8,7 +8,7 @@ render_variants(render_fun, params, ..., clean = FALSE)
 }
 \arguments{
 \item{render_fun}{One of \code{\link[=render_pinfield]{render_pinfield()}}, \code{\link[=render_silk]{render_silk()}},
-\code{\link[=render_shards]{render_shards()}}, \code{\link[=render_cubes]{render_cubes()}}.}
+\code{\link[=render_shards]{render_shards()}}, \code{\link[=render_cubes]{render_cubes()}}, \code{\link[=render_wires]{render_wires()}}.}
 
 \item{params}{Base settings from the matching \verb{*_params()} function.}
 
