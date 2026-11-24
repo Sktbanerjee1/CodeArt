@@ -1,4 +1,4 @@
-# codeart <img src="man/figures/hero_silk.jpg" align="right" width="260" alt="Silk ribbons in nebula colours"/>
+# codeart
 
 **Generative art from code: describe a picture with a few settings, press run, get a print-ready image.**
 
@@ -6,6 +6,12 @@ codeart turns mathematical noise, light and geometry into high-resolution artwor
 need to be a programmer: every artwork is made by changing a handful of plain settings, such as
 colours, size and shape, and running one line. The same settings always give the same picture,
 so you can explore freely and come back to a favourite later.
+
+<p align="center">
+  <img src="man/figures/codeart_demo.gif" width="100%" alt="Typing one line of R per style and the artwork it renders"/>
+</p>
+
+<p align="center"><em>One line of R per artwork: Pin-field, Silk flow, Crystal shards, Iso cubes, Wire flow.</em></p>
 
 ---
 
@@ -35,7 +41,7 @@ so you can explore freely and come back to a favourite later.
 | <img src="man/figures/hero_silk.jpg" width="220"/> | **Silk flow** | Soft ribbons of colour folding over each other, with crisp edges, glow and film grain | `render_silk()` |
 | <img src="man/figures/hero_shards.jpg" width="220"/> | **Crystal shards** | Layers of flat polygonal shards, from large to tiny, clustering into light and dark areas | `render_shards()` |
 | <img src="man/figures/hero_cubes.jpg" width="220"/> | **Iso cubes** | A wall of glossy rounded blocks under a spotlight, with soft highlights on their edges | `render_cubes()` |
-| <img src="man/figures/hero_wires.jpg" width="220"/> | **Wire flow** | Hundreds of fine glossy wires flowing like combed hair over a smooth mound, their ends lifting off into a dark sky | `render_wires()` |
+| <img src="man/figures/hero_wires.jpg" width="220"/> | **Wire flow** | Hundreds of fine glossy wires flowing like combed hair over smooth hills, under a dark sky | `render_wires()` |
 
 ---
 
@@ -163,51 +169,84 @@ str(silk_params())     # a quick list
 
 ## Colours and palettes
 
-### Pin-field: 3 palettes
+Every style comes with ready-made colour schemes. **Pin-field** and **Silk flow** use named
+palettes. **Crystal shards**, **Iso cubes** and **Wire flow** have two colour modes:
 
-<img src="man/figures/palettes_pinfield.jpg" width="100%" alt="Pin-field palettes"/>
+| Mode | What you get | How to choose |
+|---|---|---|
+| **Mono** | Shades of a single colour, from deep shadow to light | `palette_mode = "mono", mono = "cobalt"`, or **any colour as a hex code**, e.g. `mono = "#E0457B"` |
+| **Multi** | A hand-picked set of several colours | `palette_mode = "multi", multi = "tropical"` |
+
+Mono presets (shards, cubes, wires): `steel_teal` · `teal` · `emerald` · `cobalt` · `violet` · `crimson` · `amber` · `rose` · `slate` · `silver`
+
+Multi palettes (shards, cubes, wires): `jade_night` · `tropical` · `sunset` · `ocean` · `forest` · `ember` · `berry` · `desert` · `neon` · `slate_accent`
+
+### Pin-field
+
+<img src="man/figures/palettes_pinfield.jpg" width="100%" alt="Pin-field colour variations"/>
+
+Three palettes, from cool edges to a warm core.
+
+Palettes: `chromatic` · `aurora` · `ember`
 
 ```r
-render_pinfield(pinfield_params(palette = "aurora"))   # "chromatic", "aurora" or "ember"
+render_pinfield(pinfield_params(palette = "aurora"))
 ```
 
-### Silk flow: 10 palettes
+### Silk flow
 
-<img src="man/figures/palettes_silk.jpg" width="100%" alt="Silk flow palettes"/>
+<img src="man/figures/palettes_silk.jpg" width="100%" alt="Silk flow colour variations"/>
+
+Ten palettes, each with its own deep background tone.
+
+Palettes: `nebula` · `aurora` · `sunset` · `ocean` · `ember` · `orchid` · `citrus` · `rose_gold` · `neon` · `graphite`
 
 ```r
 render_silk(silk_params(palette = "citrus"))
 ```
 
-`nebula` · `aurora` · `sunset` · `ocean` · `ember` · `orchid` · `citrus` · `rose_gold` · `neon` · `graphite`
+### Crystal shards
 
-### Crystal shards, Iso cubes and Wire flow: one colour, or many
+<img src="man/figures/palettes_shards.jpg" width="100%" alt="Crystal shards colour variations"/>
 
-These three styles have two colour modes:
+Top row: mono `teal`, `cobalt`, `crimson`. Bottom row: multi `tropical`, `sunset`, `berry`.
 
-**Mono**: shades of a single colour, from deep shadow to light. Choose a preset or **any colour
-you like** as a hex code (copy one from any colour picker, e.g. `"#E0457B"`):
+Colours: any mono preset or hex code, or any multi palette (lists above).
 
 ```r
 render_shards(shards_params(palette_mode = "mono", mono = "cobalt"))
-render_cubes(cubes_params(palette_mode = "mono", mono = "#E0457B"))
-```
-
-Mono presets: `steel_teal` · `teal` · `emerald` · `cobalt` · `violet` · `crimson` · `amber` · `rose` · `slate` · `silver`
-
-**Multi**: a hand-picked palette of several colours:
-
-```r
 render_shards(shards_params(palette_mode = "multi", multi = "tropical"))
 ```
 
-Multi palettes: `jade_night` · `tropical` · `sunset` · `ocean` · `forest` · `ember` · `berry` · `desert` · `neon` · `slate_accent`
+### Iso cubes
 
-<img src="man/figures/palettes_shards.jpg" width="100%" alt="Crystal shard colours"/>
+<img src="man/figures/palettes_cubes.jpg" width="100%" alt="Iso cubes colour variations"/>
 
-<img src="man/figures/palettes_cubes.jpg" width="100%" alt="Iso cube colours"/>
+Top row: mono `steel_teal`, `violet`, `amber`. Bottom row: multi `sunset`, `ocean`, `neon`.
 
-**Number of tones.** `n_tones` sets how many colour steps are used: fewer gives a bold,
+Colours: any mono preset or hex code, or any multi palette (lists above).
+
+```r
+render_cubes(cubes_params(palette_mode = "mono", mono = "violet"))
+render_cubes(cubes_params(palette_mode = "multi", multi = "ocean"))
+```
+
+### Wire flow
+
+<img src="man/figures/palettes_wires.jpg" width="100%" alt="Wire flow colour variations"/>
+
+Top row: mono `silver`, `amber`, `violet`. Bottom row: multi `ocean`, `neon`, `sunset`.
+
+Colours: any mono preset or hex code, or any multi palette (lists above). The sky takes a dark tint of the palette automatically; set your own with `bg = "#0E1B1E"`.
+
+```r
+render_wires(wires_params(palette_mode = "mono", mono = "amber"))
+render_wires(wires_params(palette_mode = "multi", multi = "neon"))
+```
+
+### Number of tones
+
+For shards, cubes and wires, `n_tones` sets how many colour steps are used: fewer gives a bold,
 poster-like look; more gives smoother shading.
 
 ```r
@@ -429,12 +468,6 @@ Each table lists the settings that change the look the most. Try one change at a
 
 ### Wire flow: `wires_params()`
 
-<img src="man/figures/hero_wires.jpg" width="100%" alt="Wire flow, multi palette ocean"/>
-
-```r
-render_wires(wires_params(palette_mode = "multi", multi = "ocean"))
-```
-
 | Setting | What it changes | Default | Try |
 |---|---|---|---|
 | `palette_mode`, `mono`, `multi` | Colours (see above); the darkest tone colours the surface under the wires | mono `"silver"` | multi `"ocean"`, mono `"amber"` |
@@ -517,7 +550,8 @@ R/
   cubes.R             cubes_params(), render_cubes()
   wires.R             wires_params(), render_wires()
   variants.R          render_variants()
-man/figures/          README images
+man/figures/          README images and demo GIF (built from tools/readme_figures.R renders)
+tools/                readme_figures.R: renders every README image (not part of the package build)
 tests/testthat/       parameter + tiny render tests
 inst/examples/        gallery.R
 inst/legacy/          the original standalone scripts
