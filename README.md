@@ -30,6 +30,8 @@ so you can explore freely and come back to a favourite later.
 11. [Troubleshooting](#troubleshooting)
 12. [Glossary](#glossary)
 13. [For developers](#for-developers)
+14. [Feedback and contributions](#feedback-and-contributions)
+15. [License](#license)
 
 ---
 
@@ -111,7 +113,7 @@ RStudio open the **Files** tab. To keep things tidy, send all images to a folder
 render_silk(silk_params(out_dir = "my-art"))
 ```
 
-Try the other three styles the same way:
+Try the other four styles the same way:
 
 ```r
 render_pinfield()
@@ -285,14 +287,17 @@ Ready-made sizes:
 | 4K desktop wallpaper | `aspect = "16:9", W = 12.8, dpi = 300` | 3840 × 2160 |
 | A4 print | `aspect = "210:297", W = 8.27, dpi = 300` | 2481 × 3508 |
 | A3 print | `aspect = "297:420", W = 11.69, dpi = 300` | 3507 × 4960 |
-| Large print (default) | `aspect = "16:9", W = 16, dpi = 300` | 4800 × 2700 |
+| Large print | `aspect = "16:9", W = 16, dpi = 300` | 4800 × 2700 |
 
 ```r
 render_cubes(cubes_params(aspect = "4:5", W = 3.6))
 ```
 
-The composition adapts to the shape: portrait formats get more rows of pins, cubes or shards
-rather than a stretched picture.
+Each style has its own default shape: Pin-field 16:9, Silk flow 16:10, Crystal shards 9:16
+(portrait), Iso cubes and Wire flow 3:2. All defaults are 300 dpi.
+
+The composition adapts to the shape: portrait formats get more rows of pins, cubes, shards or
+wires rather than a stretched picture.
 
 **Sharper silk and cubes.** These two styles are painted on an internal canvas and then
 enlarged smoothly. For the crispest large prints, raise `compute_px` (default `2000`) toward the
@@ -554,7 +559,7 @@ man/figures/          README images and demo GIF (built from tools/readme_figure
 tools/                readme_figures.R: renders every README image (not part of the package build)
 tests/testthat/       parameter + tiny render tests
 inst/examples/        gallery.R
-inst/legacy/          the original standalone scripts
+inst/legacy/          the original standalone scripts (kept in the repository, not installed with the package)
 ```
 
 Development loop:
@@ -579,6 +584,17 @@ Dependencies: [ambient](https://cran.r-project.org/package=ambient) (noise),
 
 ---
 
+## Feedback and contributions
+
+Found a bug, have an idea for a new style, or made something you'd like to share? Open an issue
+at <https://github.com/Sktbanerjee1/CodeArt/issues>. Pull requests are welcome; please run
+`devtools::test()` before sending one.
+
+---
+
 ## License
 
-MIT © Saikat Bandyopadhyay. See `LICENSE`.
+The code is released under the MIT License © Saikat Bandyopadhyay. See `LICENSE`.
+
+codeart places no restrictions on the images you create with it. A credit or a link back to this
+repository is appreciated but not required; the default watermark does this for you.

@@ -27,6 +27,14 @@ Every image carries a small "CodeArt" watermark with the project address
 \code{clean = TRUE}, or switch it off for the whole session with
 \code{set_watermark(FALSE)}.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/Sktbanerjee1/CodeArt}
+  \item Report bugs at \url{https://github.com/Sktbanerjee1/CodeArt/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Saikat Bandyopadhyay \email{saikat.bandyopadhyay.dsx@gmail.com}
 

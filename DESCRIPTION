@@ -1,17 +1,21 @@
 Package: codeart
 Type: Package
-Title: Generative Data Art from Noise Fields, Ribbons, Shards and Cubes
+Title: Generative Art from Noise Fields, Ribbons, Shards, Cubes and Wires
 Version: 0.1.0
 Authors@R:
     person("Saikat", "Bandyopadhyay",
            email = "saikat.bandyopadhyay.dsx@gmail.com",
            role = c("aut", "cre"))
-Description: Renders high-resolution generative artworks: an extruded
-    pin-field terrain, layered silk ribbons, Voronoi crystal shards and a
-    wall of glossy rounded cubes. Every style has a parameter constructor,
-    palette presets (shades of one colour or multi-colour palettes), a
-    configurable aspect ratio and an optional name/label watermark.
+Description: Renders high-resolution generative artworks in five styles:
+    an extruded pin-field terrain, layered silk ribbons, Voronoi crystal
+    shards, a wall of glossy rounded cubes and flowing wires draped over
+    hills. Every style has a parameter constructor with plain-language
+    settings, palette presets (shades of one colour or multi-colour
+    palettes), a configurable aspect ratio, batch rendering and an optional
+    watermark.
 License: file LICENSE
+URL: https://github.com/Sktbanerjee1/CodeArt
+BugReports: https://github.com/Sktbanerjee1/CodeArt/issues
 Encoding: UTF-8
 Depends:
     R (>= 4.0.0)
