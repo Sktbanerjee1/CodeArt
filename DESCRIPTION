@@ -1,0 +1,31 @@
+Package: codeart
+Type: Package
+Title: Generative Data Art from Noise Fields, Ribbons, Shards and Cubes
+Version: 0.1.0
+Authors@R:
+    person("Saikat", "Bandyopadhyay",
+           email = "saikat.bandyopadhyay.dsx@gmail.com",
+           role = c("aut", "cre"))
+Description: Renders high-resolution generative artworks: an extruded
+    pin-field terrain, layered silk ribbons, Voronoi crystal shards and a
+    wall of glossy rounded cubes. Every style has a parameter constructor,
+    palette presets (shades of one colour or multi-colour palettes), a
+    configurable aspect ratio and an optional name/label watermark.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends:
+    R (>= 4.0.0)
+Imports:
+    ambient,
+    deldir,
+    farver,
+    ragg,
+    grDevices,
+    graphics,
+    stats,
+    utils
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.1.1

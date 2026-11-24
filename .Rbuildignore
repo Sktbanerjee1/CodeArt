@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^renders$
+^.*\.png$
+^README\.Rmd$
+^LICENSE\.md$
