@@ -13,10 +13,13 @@ export(render_pinfield)
 export(render_shards)
 export(render_silk)
 export(render_variants)
+export(render_wires)
+export(set_watermark)
 export(shards_params)
 export(silk_params)
 export(tone_palette)
 export(watermark_params)
+export(wires_params)
 importFrom(ambient,
   fbm,
   fracture,

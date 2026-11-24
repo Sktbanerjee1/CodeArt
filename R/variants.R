@@ -6,7 +6,7 @@
 #' aspect) are added to it as a suffix, so no render overwrites another.
 #'
 #' @param render_fun One of [render_pinfield()], [render_silk()],
-#'   [render_shards()], [render_cubes()].
+#'   [render_shards()], [render_cubes()], [render_wires()].
 #' @param params Base settings from the matching `*_params()` function.
 #' @param ... Named vectors of values to vary, e.g. `palette = names(SILK_PALETTES)`.
 #' @param clean `TRUE` to render without watermark.

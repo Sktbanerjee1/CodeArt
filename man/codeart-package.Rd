@@ -6,7 +6,7 @@
 \alias{codeart-package}
 \title{codeart: generative data art in R}
 \description{
-Four rendering styles, each with a parameter constructor and a renderer:
+Five rendering styles, each with a parameter constructor and a renderer:
 }
 \details{
 \tabular{lll}{
@@ -15,14 +15,17 @@ Four rendering styles, each with a parameter constructor and a renderer:
    Layered silk ribbons \tab \code{\link[=silk_params]{silk_params()}} \tab \code{\link[=render_silk]{render_silk()}} \cr
    Voronoi crystal shards \tab \code{\link[=shards_params]{shards_params()}} \tab \code{\link[=render_shards]{render_shards()}} \cr
    Glossy rounded cube wall \tab \code{\link[=cubes_params]{cubes_params()}} \tab \code{\link[=render_cubes]{render_cubes()}} \cr
+   Flowing wires over a mound \tab \code{\link[=wires_params]{wires_params()}} \tab \code{\link[=render_wires]{render_wires()}} \cr
 }
 
 
-Shared building blocks: \code{\link[=watermark_params]{watermark_params()}}, \code{\link[=tone_palette]{tone_palette()}},
+Shared building blocks: \code{\link[=watermark_params]{watermark_params()}}, \code{\link[=set_watermark]{set_watermark()}}, \code{\link[=tone_palette]{tone_palette()}},
 \code{\link[=list_palettes]{list_palettes()}}, \code{\link[=preview_colours]{preview_colours()}} and \code{\link[=render_variants]{render_variants()}}.
 
-Default watermark text can be set once per session with
-\code{options(codeart.name = "Your Name", codeart.label = "CodeArt")}.
+Every image carries a small "CodeArt" watermark with the project address
+(https://github.com/Sktbanerjee1/CodeArt). Render without it with
+\code{clean = TRUE}, or switch it off for the whole session with
+\code{set_watermark(FALSE)}.
 }
 \author{
 \strong{Maintainer}: Saikat Bandyopadhyay \email{saikat.bandyopadhyay.dsx@gmail.com}

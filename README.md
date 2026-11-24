@@ -11,7 +11,7 @@ so you can explore freely and come back to a favourite later.
 
 ## Contents
 
-1. [The four styles](#the-four-styles)
+1. [The five styles](#the-five-styles)
 2. [Getting started (first-time setup)](#getting-started)
 3. [Your first artwork](#your-first-artwork)
 4. [How a recipe works](#how-a-recipe-works)
@@ -27,7 +27,7 @@ so you can explore freely and come back to a favourite later.
 
 ---
 
-## The four styles
+## The five styles
 
 | | Style | What it looks like | Made with |
 |---|---|---|---|
@@ -35,6 +35,7 @@ so you can explore freely and come back to a favourite later.
 | <img src="man/figures/hero_silk.jpg" width="220"/> | **Silk flow** | Soft ribbons of colour folding over each other, with crisp edges, glow and film grain | `render_silk()` |
 | <img src="man/figures/hero_shards.jpg" width="220"/> | **Crystal shards** | Layers of flat polygonal shards, from large to tiny, clustering into light and dark areas | `render_shards()` |
 | <img src="man/figures/hero_cubes.jpg" width="220"/> | **Iso cubes** | A wall of glossy rounded blocks under a spotlight, with soft highlights on their edges | `render_cubes()` |
+| *(preview coming)* | **Wire flow** | Hundreds of fine glossy wires flowing like combed hair over a smooth mound, their ends lifting off into a dark sky | `render_wires()` |
 
 ---
 
@@ -110,6 +111,7 @@ Try the other three styles the same way:
 render_pinfield()
 render_shards()
 render_cubes()
+render_wires()
 ```
 
 ---
@@ -131,6 +133,7 @@ Each style has its own pair:
 | Silk flow | `silk_params()` | `render_silk()` |
 | Crystal shards | `shards_params()` | `render_shards()` |
 | Iso cubes | `cubes_params()` | `render_cubes()` |
+| Wire flow | `wires_params()` | `render_wires()` |
 
 You only write the settings you want to **change**; everything else keeps its default.
 Separate several changes with commas:
@@ -178,9 +181,9 @@ render_silk(silk_params(palette = "citrus"))
 
 `nebula` · `aurora` · `sunset` · `ocean` · `ember` · `orchid` · `citrus` · `rose_gold` · `neon` · `graphite`
 
-### Crystal shards and Iso cubes: one colour, or many
+### Crystal shards, Iso cubes and Wire flow: one colour, or many
 
-These two styles have two colour modes:
+These three styles have two colour modes:
 
 **Mono**: shades of a single colour, from deep shadow to light. Choose a preset or **any colour
 you like** as a hex code (copy one from any colour picker, e.g. `"#E0457B"`):
@@ -190,7 +193,7 @@ render_shards(shards_params(palette_mode = "mono", mono = "cobalt"))
 render_cubes(cubes_params(palette_mode = "mono", mono = "#E0457B"))
 ```
 
-Mono presets: `steel_teal` · `teal` · `emerald` · `cobalt` · `violet` · `crimson` · `amber` · `rose` · `slate`
+Mono presets: `steel_teal` · `teal` · `emerald` · `cobalt` · `violet` · `crimson` · `amber` · `rose` · `slate` · `silver`
 
 **Multi**: a hand-picked palette of several colours:
 
@@ -260,18 +263,45 @@ final pixel width, for example `compute_px = 4800`. It takes longer and needs mo
 
 ## Signing your work
 
-By default every image carries a small two-line signature in the bottom-right corner:
-**CodeArt** in bold above the artist's name.
+Every image carries a small two-line watermark in the bottom-right corner: **CodeArt** in bold,
+with the project address **https://github.com/Sktbanerjee1/CodeArt** underneath, so people who
+see your art can find the tool that made it.
 
-**Use your own name** once per session (put it at the top of your script):
+### Rendering without the watermark
+
+There are three ways, depending on how much you want to switch off:
+
+| You want | Do this |
+|---|---|
+| One image without watermark | Add `clean = TRUE` to the render call. The file name gets `_clean`, so it never overwrites the signed version. |
+| A recipe that is always clean | Put `watermark = watermark_params(enabled = FALSE)` in the settings. |
+| Nothing watermarked for the rest of the session | Run `set_watermark(FALSE)` once, at the top of your script. |
 
 ```r
-options(codeart.name = "Your Name", codeart.label = "CodeArt")
+# one image
+render_silk(silk_params(palette = "ocean"), clean = TRUE)
+# -> silk_flow_ocean_16x10_clean.png
+
+# one recipe
+clean_recipe <- cubes_params(watermark = watermark_params(enabled = FALSE))
+render_cubes(clean_recipe)
+
+# the whole session (run this first, then build your recipes)
+set_watermark(FALSE)
+render_wires()
+set_watermark(TRUE)        # switch it back on
 ```
 
-**Change the look** for one image:
+> `set_watermark()` affects recipes created **after** you call it. A recipe saved earlier
+> keeps the watermark setting it was made with.
+
+### Changing the text or the look
 
 ```r
+# your own caption under "CodeArt", for the whole session
+set_watermark(TRUE, caption = "Your Name")
+
+# a different look for one image
 render_silk(silk_params(
   watermark = watermark_params(position = "top-left", alpha = 0.5, size = 0.025)
 ))
@@ -279,19 +309,13 @@ render_silk(silk_params(
 
 | Watermark setting | Meaning |
 |---|---|
+| `enabled` | `TRUE` to draw it, `FALSE` for a clean image |
+| `caption` | Second line (default: the project address) |
+| `label` | Bold first line (default: `CodeArt`) |
 | `position` | `"bottom-right"`, `"bottom-left"`, `"top-right"`, `"top-left"` |
 | `size` | Text size as a share of the image height (`0.02` = 2%) |
 | `alpha` | Opacity, from `0` (invisible) to `1` (solid) |
 | `colour` | Text colour, e.g. `"#FFFFFF"` |
-| `name`, `label` | The two lines of text |
-
-**Clean version (no watermark):** add `clean = TRUE`. The file gets `_clean` in its name, so it
-never overwrites the signed version:
-
-```r
-render_silk(silk_params(palette = "ocean"), clean = TRUE)
-# -> silk_flow_ocean_16x10_clean.png
-```
 
 ---
 
@@ -403,6 +427,24 @@ Each table lists the settings that change the look the most. Try one change at a
 
 > If you push `yaw`, `pitch` or `elongation` far and see holes, add `search = 2`.
 
+### Wire flow: `wires_params()`
+
+| Setting | What it changes | Default | Try |
+|---|---|---|---|
+| `palette_mode`, `mono`, `multi` | Colours (see above); the darkest tone colours the surface under the wires | mono `"silver"` | multi `"ocean"`, mono `"amber"` |
+| `bg` | Sky colour; `NULL` picks a dark tint of the palette | `NULL` | `"#0E1B1E"` |
+| `n_wires`, `wire_width` | How many wires and how thick | `1200`, `0.25` | `600`, `0.4` (bold) / `2000`, `0.18` (fine) |
+| `swirl`, `flow_freq` | How much the wires bend, and the size of the swirls | `1.9`, `0.5` | `0.8` (calm), `3` (wild) |
+| `flow_angle` | Main direction of the flow (radians) | `0.25` | `0`, `0.8` |
+| `freq`, `contrast`, `h_scale` | Size, steepness and height of the mound | `0.25`, `0.6`, `70` | `0.15` (one big hill), `0.4` (rolling hills) |
+| `zoom`, `pan` | Close-up factor and sideways shift of the camera | `1.7`, `0` | `1.2` (wide), `2.5` (close), `pan = 0.2` |
+| `row_gap` | Camera tilt: higher looks more from above | `0.62` | `0.45`, `0.9` |
+| `end_lift`, `end_len` | Lift the wire ends off the surface (off by default) | `0`, `0.12` | `0.02`, `0.15` |
+| `highlight` | Shine along each wire | `0.5` | `0.2`, `0.8` |
+| `steps` | Length of each wire | `260` | `120` (short strands), `400` |
+
+> More wires and longer wires take longer to draw. For drafts use `n_wires = 400`.
+
 ---
 
 ## Tips for print and social media
@@ -430,8 +472,9 @@ Each table lists the settings that change the look the most. Try one change at a
 | `cannot allocate vector of size ...` | Not enough memory: lower `compute_px` (silk, cubes) or `nx`/`ny` (pin-field). |
 | It takes very long | Use draft settings (`W = 6, dpi = 100`, lower `compute_px`) while exploring. |
 | I can't find the image | It is in `getwd()`, or in the folder you set with `out_dir`. |
-| The watermark shows the wrong name | Set `options(codeart.name = "Your Name")` before rendering. |
+| The watermark text is wrong, or still shows after `set_watermark(FALSE)` | `set_watermark()` only affects recipes made after it. Call it first, then create the settings (e.g. `silk_params()`), then render. |
 | Holes or gaps in cubes | Add `search = 2` to `cubes_params()`. |
+| Wire flow shows a lot of empty sky | Raise `zoom` or `row_gap`, or try another `pan` or `seed`; taller formats (4:5, 9:16) fill with terrain automatically. |
 
 ---
 
@@ -446,7 +489,7 @@ Each table lists the settings that change the look the most. Try one change at a
 | **Hex code** | A colour written as `#RRGGBB`, e.g. `#E0457B`; any colour picker shows it. |
 | **Mono / multi** | Shades of one colour / several different colours. |
 | **Render** | Calculating the image and saving it as a file. |
-| **Clean** | The same image without the watermark. |
+| **Clean** | The same image without the watermark (`clean = TRUE`). |
 
 ---
 
@@ -460,12 +503,13 @@ R/
   codeart-package.R   package doc + imports
   utils.R             aspect parsing, blur, colour-space helpers, params merge, file naming
   canvas.R            ragg device setup, render report
-  watermark.R         watermark_params(), drawing
+  watermark.R         watermark_params(), set_watermark(), drawing
   palettes.R          palette presets, tone_palette(), list/preview helpers
   pinfield.R          pinfield_params(), render_pinfield()
   silk.R              silk_params(), render_silk()
   shards.R            shards_params(), render_shards()
   cubes.R             cubes_params(), render_cubes()
+  wires.R             wires_params(), render_wires()
   variants.R          render_variants()
 man/figures/          README images
 tests/testthat/       parameter + tiny render tests

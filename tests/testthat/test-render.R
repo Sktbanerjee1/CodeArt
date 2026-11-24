@@ -16,6 +16,13 @@ test_that("pin-field renders", {
   expect_lt(abs(d[["h"]] - 120*9/16), 1.01)
 })
 
+test_that("session-wide watermark switch renders without errors", {
+  old <- set_watermark(FALSE); on.exit(options(old), add = TRUE)
+  p <- do.call(cubes_params, c(small, list(compute_px = 80)))
+  expect_false(p$watermark$enabled)
+  expect_true(file.exists(suppressMessages(render_cubes(p))))
+})
+
 test_that("silk renders, clean variant gets suffix", {
   p <- do.call(silk_params, c(small, list(compute_px = 120)))
   f <- suppressMessages(render_silk(p, clean = TRUE))
@@ -40,4 +47,22 @@ test_that("render_variants names every file uniquely", {
   f <- suppressMessages(render_variants(render_cubes, p, seed = 1:2, mono = c("teal", "rose")))
   expect_length(unique(f), 4)
   expect_true(all(file.exists(f)))
+})
+
+test_that("wires render in both palette modes and with a custom sky", {
+  for (mode in c("mono", "multi")) {
+    p <- do.call(wires_params, c(small, list(palette_mode = mode, nx = 40, ny = 40, n_wires = 60, steps = 40)))
+    f <- suppressMessages(render_wires(p))
+    expect_true(file.exists(f))
+    expect_match(basename(f), "^wire_flow_")
+  }
+  p <- do.call(wires_params, c(small, list(nx = 40, ny = 40, n_wires = 40, steps = 30, bg = "#000000", aspect = "4:5")))
+  d <- png_dims(suppressMessages(render_wires(p, clean = TRUE)))
+  expect_equal(unname(d[["w"]]), 120)
+  expect_gt(d[["h"]], d[["w"]])
+})
+
+test_that("wires_params rejects typos and impossible sizes", {
+  expect_error(wires_params(n_wire = 10), "unknown parameter")
+  expect_error(render_wires(wires_params(steps = 2, out_dir = tempdir())), "at least 4")
 })

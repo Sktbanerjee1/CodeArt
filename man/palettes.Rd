@@ -22,9 +22,9 @@ MULTI_PALETTES
 \code{ramp} (cool edge -> warm core) and \code{fixed} (\code{bg}, \code{valley}, \code{tip}).
 \item \code{SILK_PALETTES}: ramps for \code{\link[=render_silk]{render_silk()}}, each a list with \code{bg} and \code{ramp}.
 \item \code{MONO_COLOURS}: base colours for single-colour shades (\code{\link[=tone_palette]{tone_palette()}},
-used by \code{\link[=render_shards]{render_shards()}} and \code{\link[=render_cubes]{render_cubes()}}).
-\item \code{MULTI_PALETTES}: multi-colour palettes for \code{\link[=render_shards]{render_shards()}} and
-\code{\link[=render_cubes]{render_cubes()}}; sorted dark -> light automatically.
+used by \code{\link[=render_shards]{render_shards()}}, \code{\link[=render_cubes]{render_cubes()}} and \code{\link[=render_wires]{render_wires()}}).
+\item \code{MULTI_PALETTES}: multi-colour palettes for \code{\link[=render_shards]{render_shards()}},
+\code{\link[=render_cubes]{render_cubes()}} and \code{\link[=render_wires]{render_wires()}}; sorted dark -> light automatically.
 }
 }
 \details{

@@ -5,23 +5,24 @@
 \title{Watermark settings}
 \usage{
 watermark_params(
-  enabled = TRUE,
-  name = getOption("codeart.name", "Saikat Bandyopadhyay"),
+  enabled = getOption("codeart.watermark", TRUE),
+  caption = getOption("codeart.caption", "https://github.com/Sktbanerjee1/CodeArt"),
   label = getOption("codeart.label", "CodeArt"),
   position = c("bottom-right", "bottom-left", "top-right", "top-left"),
   size = 0.02,
   margin = 0.025,
   colour = "#FFFFFF",
   alpha = 0.8,
-  family = "sans"
+  family = "sans",
+  name = NULL
 )
 }
 \arguments{
-\item{enabled}{Draw the watermark.}
+\item{enabled}{Draw the watermark. Default: \code{getOption("codeart.watermark", TRUE)}.}
 
-\item{name}{Name line.}
+\item{caption}{Second line. Default: \code{getOption("codeart.caption")}, else the project URL.}
 
-\item{label}{Bold label line.}
+\item{label}{Bold first line. Default: \code{getOption("codeart.label", "CodeArt")}.}
 
 \item{position}{One of "bottom-right", "bottom-left", "top-right", "top-left".}
 
@@ -34,16 +35,28 @@ watermark_params(
 \item{alpha}{Text opacity (a soft drop shadow is added automatically).}
 
 \item{family}{Font family.}
+
+\item{name}{Deprecated alias for \code{caption}, kept so older scripts still work.}
 }
 \value{
 A list, used as the \code{watermark} element of any \verb{*_params()}.
 }
 \description{
 Two stacked lines in a corner: a bold label (default "CodeArt") above a
-name. Sizes are fractions of the image height, so the watermark scales with
-any aspect ratio. Defaults for \code{name} and \code{label} can be set once with
-\code{options(codeart.name = ..., codeart.label = ...)}.
+caption (default the project address, https://github.com/Sktbanerjee1/CodeArt).
+Sizes are fractions of the image height, so the watermark scales with any
+aspect ratio.
+}
+\details{
+Ways to render without a watermark:
+\itemize{
+\item one image: \code{render_silk(silk_params(), clean = TRUE)} (file name gets \verb{_clean});
+\item one recipe: \code{silk_params(watermark = watermark_params(enabled = FALSE))};
+\item every render in the session: \code{set_watermark(FALSE)} (see \code{\link[=set_watermark]{set_watermark()}}).
+}
 }
 \examples{
 watermark_params(position = "top-left", alpha = 0.6)
+watermark_params(caption = "Your Name")
+watermark_params(enabled = FALSE)
 }

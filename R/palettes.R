@@ -4,9 +4,9 @@
 #'   `ramp` (cool edge -> warm core) and `fixed` (`bg`, `valley`, `tip`).
 #' * `SILK_PALETTES`: ramps for [render_silk()], each a list with `bg` and `ramp`.
 #' * `MONO_COLOURS`: base colours for single-colour shades ([tone_palette()],
-#'   used by [render_shards()] and [render_cubes()]).
-#' * `MULTI_PALETTES`: multi-colour palettes for [render_shards()] and
-#'   [render_cubes()]; sorted dark -> light automatically.
+#'   used by [render_shards()], [render_cubes()] and [render_wires()]).
+#' * `MULTI_PALETTES`: multi-colour palettes for [render_shards()],
+#'   [render_cubes()] and [render_wires()]; sorted dark -> light automatically.
 #'
 #' All ramps step through neighbouring hues only (no muddy complements) and
 #' are interpolated in CIE Lab.
@@ -64,7 +64,8 @@ MONO_COLOURS <- c(
   crimson    = "#F0435A",
   amber      = "#FFB020",
   rose       = "#FF7EB6",
-  slate      = "#9FB4C8"
+  slate      = "#9FB4C8",
+  silver     = "#B4BCC0"
 )
 
 #' @rdname palettes
