@@ -11,7 +11,7 @@ Description: Renders high-resolution generative artworks: an extruded
     wall of glossy rounded cubes. Every style has a parameter constructor,
     palette presets (shades of one colour or multi-colour palettes), a
     configurable aspect ratio and an optional name/label watermark.
-License: MIT + file LICENSE
+License: file LICENSE
 Encoding: UTF-8
 Depends:
     R (>= 4.0.0)
