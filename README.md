@@ -46,22 +46,31 @@ You only do this once.
 - R, the engine: <https://cloud.r-project.org>
 - RStudio, the friendly window you work in: <https://posit.co/download/rstudio-desktop/>
 
-**2. Install codeart.** Open RStudio, click into the **Console** (the panel with the `>` prompt),
-paste these lines and press Enter:
+**2. Install codeart.** The package lives on GitHub at
+**<https://github.com/Sktbanerjee1/CodeArt>**. Open RStudio, click into the **Console** (the panel
+with the `>` prompt), paste these two lines and press Enter:
 
 ```r
-install.packages(c("remotes", "ambient", "deldir", "farver", "ragg"))
+install.packages("remotes")
+remotes::install_github("Sktbanerjee1/CodeArt")
 ```
 
-Then install codeart itself, using whichever applies to you:
+This downloads codeart from the repository above together with everything it needs
+(ambient, deldir, farver, ragg). If R asks whether to update other packages, typing `1`
+(All) or `3` (None) are both fine.
 
-```r
-# a) you have the project folder (R-Art) on your computer:
-remotes::install_local("path/to/R-Art")
+To get the newest version later, run `remotes::install_github("Sktbanerjee1/CodeArt")` again.
 
-# b) the project is published on GitHub (replace with the real account/repository):
-remotes::install_github("account-name/codeart")
-```
+<details>
+<summary>Other ways to install</summary>
+
+- **From a downloaded copy:** on <https://github.com/Sktbanerjee1/CodeArt> click
+  **Code → Download ZIP**, unzip it, then run
+  `remotes::install_local("path/to/the/unzipped/folder")`.
+- **With Git:** `git clone https://github.com/Sktbanerjee1/CodeArt.git`, then
+  `remotes::install_local("CodeArt")`.
+
+</details>
 
 **3. Load it** at the start of every session:
 
