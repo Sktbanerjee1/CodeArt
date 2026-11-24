@@ -35,7 +35,7 @@ so you can explore freely and come back to a favourite later.
 | <img src="man/figures/hero_silk.jpg" width="220"/> | **Silk flow** | Soft ribbons of colour folding over each other, with crisp edges, glow and film grain | `render_silk()` |
 | <img src="man/figures/hero_shards.jpg" width="220"/> | **Crystal shards** | Layers of flat polygonal shards, from large to tiny, clustering into light and dark areas | `render_shards()` |
 | <img src="man/figures/hero_cubes.jpg" width="220"/> | **Iso cubes** | A wall of glossy rounded blocks under a spotlight, with soft highlights on their edges | `render_cubes()` |
-| *(preview coming)* | **Wire flow** | Hundreds of fine glossy wires flowing like combed hair over a smooth mound, their ends lifting off into a dark sky | `render_wires()` |
+| <img src="man/figures/hero_wires.jpg" width="220"/> | **Wire flow** | Hundreds of fine glossy wires flowing like combed hair over a smooth mound, their ends lifting off into a dark sky | `render_wires()` |
 
 ---
 
@@ -428,6 +428,12 @@ Each table lists the settings that change the look the most. Try one change at a
 > If you push `yaw`, `pitch` or `elongation` far and see holes, add `search = 2`.
 
 ### Wire flow: `wires_params()`
+
+<img src="man/figures/hero_wires.jpg" width="100%" alt="Wire flow, multi palette ocean"/>
+
+```r
+render_wires(wires_params(palette_mode = "multi", multi = "ocean"))
+```
 
 | Setting | What it changes | Default | Try |
 |---|---|---|---|
